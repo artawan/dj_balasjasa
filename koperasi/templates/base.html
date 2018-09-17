@@ -1,0 +1,120 @@
+{% load staticfiles %}
+<!--TODO: Benahi halaman dashboard-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{%  static 'images/icon.png' %}"/>
+	<title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'w3.css' %}">
+    <link rel="stylesheet" href="{% static 'theme-green.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<!-- Navbar -->
+<div class="w3-top w3-theme" style="z-index:4">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+  <a href="{% url 'koperasi:main' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" style="width:220px"><i class="fa fa-home w3-margin-right"></i>Balasjasa.id</a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+  <!-- Notifications: style can be found in dropdown.less -->
+  <div class="w3-dropdown-hover w3-hide-small">
+  </div>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"><img src="{% static 'photo.jpg' %}" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a>
+ </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-animate-left w3-dark-gray" style="z-index:3;width:220px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="{% static 'photo.jpg' %}" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span><strong>{{ user.username }}</strong></span><br>
+      <a href="{% url 'koperasi:logout' %}" class="w3-bar-item w3-button" title="Keluar Aplikasi"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-bar-block">
+    <h5><a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard"></i>   Dashboard</a></h5>
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-dark-grey w3-hide-large  w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding {% block simpan_aktive %}{% endblock %}"><i class="fa fa-users fa-fw"></i>  Transaksi simpanan</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding {% block transaksi_aktive %}{% endblock %}"><i class="fa fa-eye fa-fw"></i>  Transaksi Kas</a>
+    <a href="{% url 'koperasi:dashboard' %}" class="w3-bar-item w3-button w3-padding {% block koperasi_aktive %}{% endblock %}"><i class="fa fa-users fa-fw"></i>  Koperasi</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Geo</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a><br><br>
+    <a href="{% url 'koperasi:logout' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  Logout</a>
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-main" style="margin-left:220px;margin-top:43px;">
+    <header class="w3-container w3-padding-top">
+        <h3><b><i class="fa fa-dashboard"></i> Judul halaman</b></h3>
+    </header>
+    <div class="w3-container">
+        {% block content %} {% endblock %}
+    </div>
+    <!-- Footer -->
+    <hr>
+    <footer class="w3-container w3-padding w3-light-grey">
+        <p>&copy;Copyright. All right reserved <a href="https://www.balasjasa.id/" target="_blank">Balasjasa.id</a></p>
+    </footer>
+    <!-- End page content -->
+</div>
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+</body>
+</html>

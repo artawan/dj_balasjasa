@@ -1,0 +1,12 @@
+<style type="text/css">
+    .w3-container input, .w3-container select{
+        width: 100%;
+    }
+</style>
+
+{% for field in form %}
+<p>
+    <label >{{ field.label_tag }}</label>
+    <div class="w3-container">{{field}}{{ field.errors }}</div>
+</p>
+{% endfor %}

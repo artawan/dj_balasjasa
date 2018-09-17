@@ -1,0 +1,56 @@
+{% extends 'base_page.html' %}
+{% block title %}Register{%endblock%}
+{% block style %}
+<style type="text/css">
+/* Modal Content/Box */
+.register {
+	background-color: #fefefe;
+	margin:auto auto auto auto; /* 5% from the top, 15% from the bottom and centered */
+	width: 40%; /* Could be more or less, depending on screen size */
+}
+
+@media (min-width:768px) {
+    .register{
+        margin-top: 5% !important;
+		margin-bottom: 5%;
+    }
+}
+@media (max-width:760px){
+    .register{
+        width: 100% !important;
+    }
+}
+@media (min-width:375px) {
+    .register{
+        margin-top: 10%;
+    }
+}
+</style>
+{%endblock%}
+{% block content %}
+<form class="w3-card-4 w3-light-grey w3-padding-large register" action="{% url 'koperasi:register' %}" method="post">
+  <h3>Register</h3>
+    {% csrf_token %}
+	{% if error_message %}
+		<div class="w3-panel w3-pale-red"><p>{{ error_message }}</p></div>
+	{% endif %}
+	<div class="w3-container w3-padding">
+		  <label for="id_username">Username:</label>
+		  <input id="id_username" maxlength="30" name="username" type="text" class="w3-input w3-border" autofocus>
+	</div>
+	<div class="w3-container w3-padding">
+		  <label for="id_email">E-mail address:</label>
+		  <input id="id_email" maxlength="254" name="email" type="text" class="w3-input w3-border">
+	</div>
+	<div class="w3-container w3-padding">
+	  <label for="id_password">Password:</label>
+	  <input id="id_password" maxlength="30" name="password" type="password" class="w3-input w3-border">
+	</div>
+	<div class="w3-container w3-padding">
+      <button type="submit" class="w3-button w3-green">Submit</button>
+	  <p>
+		  Sudah memiliki akun? <a href="{% url 'koperasi:login' %}">Klik disini</a> untuk login.
+	  </p>
+	</div>
+</form>
+{%endblock%}

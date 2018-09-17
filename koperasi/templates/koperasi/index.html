@@ -1,0 +1,174 @@
+{% extends "base_visitor.html" %}
+{% load static %}
+{% block title %} Daftar Koperasi {% endblock %}
+{% block content %}
+<!-- First Parallax Image with Logo Text -->
+<div class="w3-display-container" style="height:100%;width:100%;" id="head">
+  <div id="particle-canvas" class="w3-opacity-min">
+  </div>
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-block"><img src="{% static 'images/icon.png' %}" width='300px;'></span>
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"><span class="w3-hide-small">BALASJASA.ID</span></span>
+  </div>
+</div>
+
+<!-- register form -->
+<div class="w3-padding-64">
+</div>
+
+<!-- The App Section -->
+<div class="w3-padding-64 w3-white" id="appSection">
+  <div class="w3-row-padding">
+    <div class="w3-col l8 m6">
+      <h1 class="w3-jumbo w3-text-green"><b>Kenapa memilih kami?</b></h1>
+      <p>Membangun koperasi yang akuntabel adalah sebuah keharusan. Anda harus membangun koperasi yang akuntabel dan transaparan untuk meningkatkan kepercayaan anggota maupun pihak yang berkepentingan dengan koperasi Anda. Tingkatkan kepercayaan dan daya saing koperasi Anda sekarang juga.</p>
+      <button class="w3-button w3-light-grey w3-padding-large w3-section w3-hide-small" onclick="document.getElementById('register').style.display='block'">
+        <i class="fa fa-register"></i> Daftar Sekarang
+      </button>
+      <p><i class="fa fa-chrome w3-large"></i> <i class="fa fa-firefox w3-large"></i> <i class="fa fa-edge w3-large"></i></p>
+    </div>
+    <div class="w3-col l4 m6">
+      <img src="{% static 'images/icon.png' %}" class="w3-image w3-right w3-hide-small" width="335" height="471">
+      <div class="w3-center w3-hide-large w3-hide-medium">
+        <button class="w3-button w3-block w3-padding-large" onclick="document.getElementById('register').style.display='block'">
+          <i class="fa fa-register"></i> Daftar Sekarang
+        </button>
+        <img src="<?php echo base_url().'assets/icon.png';?>" class="w3-image w3-margin-top" width="335" height="471">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="w3-container w3-padding-64 w3-dark-grey w3-center" id="fitur">
+  <h1 class="w3-jumbo"><b>Fitur</b></h1>
+  <p>Fitur aplikasi kami.</p>
+
+  <div class="w3-row" style="margin-top:64px">
+    <a href="javascript:void(0)" onclick="openFitur('Aman')">
+      <div class="w3-col s3">
+        <i class="fa fa-user w3-text-orange w3-jumbo" ></i><br>
+        <span>Aman</span>
+      </div>
+    </a>
+    <a href="javascript:void(0)" onclick="openFitur('Stabil')">
+      <div class="w3-col s3">
+        <i class="fa fa-shield w3-text-blue w3-jumbo"></i><br>
+        <span>Stabil</span>
+      </div>
+    </a>
+    <a href="javascript:void(0)" onclick="openFitur('Global')">
+      <div class="w3-col s3">
+        <i class="fa fa-globe w3-text-amber w3-jumbo"></i><br>
+        <span>Global</span>
+      </div>
+    </a>
+    <a href="javascript:void(0)" onclick="openFitur('Cloud')">
+      <div class="w3-col s3">
+        <i class="fa fa-cloud w3-text-blue w3-jumbo"></i><br>
+        <span>Cloud</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- fitur show hide -->
+<div class="w3-container w3-black w3-center">
+<div id="Aman" class="w3-container fitur" style="display:none;">
+  <h2>Aman</h2>
+  <p>Data anda tetap aman walaupun terjadi bencana.</p>
+</div>
+
+<div id="Stabil" class="w3-container fitur" style="display:none">
+  <h2>Stabil</h2>
+  <p>Akses sistem yang tetap stabil.</p>
+</div>
+
+<div id="Global" class="w3-container fitur" style="display:none">
+  <h2>Global</h2>
+  <p>Global User access</p>
+</div>
+
+<div id="Cloud" class="w3-container fitur" style="display:none">
+  <h2>Cloud</h2>
+  <p>Cloud system make your data keep available</p>
+</div>
+</div>
+
+<!-- Pricing Section -->
+<div class="w3-padding-64 w3-center w3-white" id="harga">
+  <h1 class="w3-jumbo"><b>Kalkulasi Harga</b></h1>
+  <p class="w3-large">Pilihlah rencana harga yang sesuai dengan kebutuhan Anda.</p>
+  <div class="w3-row-padding" style="margin-top:64px">
+    <div class="w3-half w3-section">
+      <ul class="w3-ul w3-card w3-hover-shadow">
+        <li class="w3-dark-grey w3-xlarge w3-padding-32">Standar</li>
+        <li class="w3-padding-16"><b>250</b> Photos</li>
+        <li class="w3-padding-16"><b>10</b> Features</li>
+        <li class="w3-padding-16"><b>No</b> Ads</li>
+        <li class="w3-padding-16"><b>Office hours</b> Support</li>
+        <li class="w3-padding-16">
+          <h2 class="w3-opacity">Rp. 300.000 / bln</h2>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button class="w3-button w3-black w3-padding-large" onclick="document.getElementById('register').style.display='block'">Daftar</button>
+        </li>
+      </ul>
+    </div>
+    <div class="w3-half w3-section">
+      <ul class="w3-ul w3-card w3-hover-shadow">
+        <li class="w3-red w3-xlarge w3-padding-32">Premium</li>
+        <li class="w3-padding-16"><b>1000</b> Photos</li>
+        <li class="w3-padding-16"><b>50</b> Features</li>
+        <li class="w3-padding-16"><b>No</b> Ads</li>
+        <li class="w3-padding-16"><b>Endless</b> Support</li>
+        <li class="w3-padding-16">
+          <h2 class="w3-opacity">Rp. 500.000 / Bln</h2>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button class="w3-button w3-black w3-padding-large" onclick="document.getElementById('register').style.display='block'">Daftar</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br>
+</div>
+
+<!-- quote -->
+<div id="register" class="w3-modal w3-animate-opacity">
+  <div class="w3-container w3-modal-content">
+      <i onclick="document.getElementById('register').style.display='none'" class="fa fa-remove w3-xlarge w3-button w3-transparent w3-right w3-xlarge"></i>
+<form id="regForm" action="#">
+  <!-- One "tab" for each step in the form: -->
+  <h1 class="w3-center">Daftar</h1>
+  <div class="tab">Data diri Anda
+    <p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p>
+    <p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p>
+    <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+    <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+  </div>
+  <div class="tab">Profil Koperasi:
+      <p><input placeholder="Nama koperasi..." oninput="this.className = ''" name="nkoperasi"></p>
+      <p><input placeholder="Badan hukum..." oninput="this.className = ''" name="bhukum"></p>
+      <p><input placeholder="Alamat..." oninput="this.className = ''" name="alamat"></p>
+  </div>
+  <div class="tab">Login Info:
+    <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
+    <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+  </div>
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+    </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+</form>
+</div>
+</div>
+{% endblock %}

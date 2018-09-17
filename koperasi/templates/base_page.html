@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/png" href="{%  static 'images/icon.png' %}"/>
+        <title>{% block title %}{% endblock %}</title>
+        {% block style %}{% endblock %}
+        <link rel="stylesheet" href="{% static 'w3.css' %}">
+        <link rel="stylesheet" href="{% static 'theme-green.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body class="w3-light-grey">
+        <!-- Navbar -->
+        <div class="w3-top w3-theme-d2" style="z-index:4">
+         <div class="w3-bar w3-left-align w3-large">
+              <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+              <a href="{% url 'koperasi:main' %}" class="w3-bar-item w3-button w3-padding-large" style="width:220px"><i class="fa fa-home w3-margin-right"></i>Balasjasa.id</a>
+              <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
+              <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+              <div class="w3-dropdown-hover w3-hide-small">
+                <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
+                <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+                  <a href="#" class="w3-bar-item w3-button">One new friend request</a>
+                  <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
+                  <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
+                </div>
+              </div>
+              <div class="w3-dropdown-hover w3-hide-small">
+              <button class="w3-button"><img src="{% static 'photo.jpg' %}" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></button>
+                  <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="#" class="w3-bar-item w3-button">Link 1</a>
+                    <a href="#" class="w3-bar-item w3-button">Link 2</a>
+                    <a href="#" class="w3-bar-item w3-button">Link 3</a>
+                  </div>
+              </div>
+         </div>
+        </div>
+
+        <!-- Navbar on small screens -->
+        <div id="nav" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+          <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+          <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+          <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+          <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+        </div>
+
+        <div class="w3-main" style="margin-top:43px;">
+            <div class="w3-container">
+
+            {% block content %} {% endblock %}
+        </div>
+        </div>
+        <!-- Footer -->
+        <footer class="w3-container w3-padding w3-light-grey">
+            <p>&copy;Copyright. All right reserved <a href="https://www.balasjasa.id/" target="_blank">Balasjasa.id</a></p>
+        </footer>
+        <!-- End page content -->
+        <script>
+
+        function myFunction() {
+            var x = document.getElementById("nav");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+        </script>
+    </body>
+</html>

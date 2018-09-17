@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %} Daftar Koperasi {% endblock %}
+{% block koperasi_aktive %}w3-blue{% endblock %}
+{% block content %}
+<h1>DAFTAR USER</h1>
+{% if all_user %}
+<ul>
+    {% for user in all_user %}
+    <li>{{ user.id }} {{ user.username}} {{ user.email}}</li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h3>Belum ada user</h3>
+{% endif %}
+
+<h3>DAFTAR KOPERASI</h3>
+<a href="{% url 'koperasi:buat-koperasi' %}">Buat Koperasi</a>
+{% if all_koperasi %}
+<ul>
+    {% for koperasi in all_koperasi %}
+    <li>{{koperasi.nama}}  [{{koperasi.badan_hukum}}] Alamat : {{koperasi.alamat}}</li>
+    {% endfor %}
+</ul>
+{% else %}
+	<h3>Anda belum memiliki koperasi</h3>
+{% endif%}
+
+<h3>DAFTAR AKUN</h3>
+<a href="{% url 'koperasi:akun-add' %}">Tambah Akun</a>
+{% if all_akun %}
+<ul>
+    {% for akun in all_akun %}
+        <li>
+            <a href="{% url 'koperasi:detail-akun' akun.id %}">
+            {{akun.kategori}}.{{akun.kode_akun}} | {{akun.nama}} | {{akun.saldo_normal}}
+            </a>
+            <a href="{% url 'koperasi:hapus-akun' akun.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

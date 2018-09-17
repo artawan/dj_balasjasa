@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} Data Koperasi{% endblock %}
+{% block koperasi_aktive %}w3-blue{% endblock %}
+{% block content %}
+<form class="w3-container w3-padding" action="" method="post">
+  <h3>Daftarkan Koperasi</h3>
+    {% csrf_token %}
+    {{ form.management_form }}
+    {% for forms in form %}
+        <div class="w3-container w3-padding">
+    		  <label for="id_form-0-nama">Username:</label>
+    		  {{forms.nama}}
+    	</div>
+        <div class="w3-container w3-padding">
+    		  <label for="id_form-0-badan_hukum">Badan hukum:</label>
+    		  {{forms.badan_hukum}}
+    	</div>
+        <div class="w3-container w3-padding">
+    		  <label for="id_form-0-telp">Telp:</label>
+    		  {{forms.telp}}
+    	</div>
+        <div class="w3-container w3-padding">
+    		  <label for="id_form-0-alamat">Alamat:</label>
+    		  {{forms.alamat}}
+    	</div>
+        <div class="w3-container w3-padding">
+    		  <label for="id_form-0-fax">Fax:</label>
+    		  {{forms.fax}}
+    	</div>
+        <div class="w3-container w3-padding">
+    		  <label for="id_form-0-tgl">Tanggal:</label>
+    		  {{forms.tgl}}
+    	</div>
+    {% endfor %}
+    <div class="w3-container w3-padding">
+      <button type="submit" class="w3-button w3-green">Submit</button>
+  </div>
+</form>
+{% endblock %}

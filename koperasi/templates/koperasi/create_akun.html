@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} Tambah Akun{% endblock %}
+{% block content %}
+<form class="w3-container w3-card-4 w3-padding w3-light-grey" action="" method="post">
+  <h3>Tambah akun perkiraan</h3>
+      {% csrf_token %}
+      {% include 'koperasi/form-template.html' %}
+      <button type="submit">Submit</button>
+</form>
+{% endblock %}

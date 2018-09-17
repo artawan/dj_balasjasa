@@ -1,0 +1,365 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{%  static 'images/icon.png' %}"/>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'w3.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+    body, html {
+      height: 100%;
+      color: #777;
+      line-height: 1.8;
+    }
+
+    #particle-canvas{background-image: url('{% static "images/header.png" %}');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:100%;
+    z-index: -1;
+    }
+
+    /* Turn off parallax scrolling for tablets and phones */
+    @media only screen and (max-device-width: 1024px) {
+        #particle-canvas{
+            background-attachment: scroll;
+        }
+    }
+
+    #fitur .w3-row span:hover{
+      border-bottom: 6px solid black;
+    }
+
+    .w3-hover-opacity {cursor: pointer;}
+
+    /* register form */
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+    </style>
+</head>
+<body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-text-white" id="Navbar">
+    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <a href="{% url 'koperasi:main' %}" class="w3-bar-item w3-button">HOME</a>
+    <a href="#harga" class="w3-bar-item w3-button w3-hide-small">HARGA</a>
+    <a href="daftar" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-register"></i> DAFTAR</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('register').style.display='block'" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> MODAL DAFTAR</a>
+    <a href="#kontak" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> HUBUNGI KAMI</a>
+    <a href="login" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-green">
+      <i class="fa fa-sign-in" aria-hidden="true"> LOGIN</i>
+    </a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <a href="#harga" class="w3-bar-item w3-button" onclick="toggleFunction()">HARGA</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('register').style.display='block'" class="w3-bar-item w3-button">DAFTAR</a>
+    <a href="#kontak" class="w3-bar-item w3-button" onclick="toggleFunction()">HUBUNGI KAMI</a>
+    <a href="login" class="w3-bar-item w3-button w3-hover-red">
+      <i class="fa fa-sign-in" aria-hidden="true"> LOGIN</i>
+    </a>
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- <div id="register" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content">
+    <div class="w3-container w3-white"  style="margin-top:-30px;">
+      <i onclick="document.getElementById('register').style.display='none'" class="fa fa-remove w3-xlarge w3-button w3-transparent w3-right w3-xlarge"></i>
+      <h2 class="w3-wide">Daftar</h2>
+      <p>Daftarkan koperasi anda dan dapatkan manfaatnya.</p>
+      <form action="/action_page.php" class="w3-container w3-margin">
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+          <div class="w3-rest">
+            <input class="w3-input w3-border" name="nama" type="text" placeholder="Nama koperasi">
+          </div>
+      </div>
+
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope-o"></i></div>
+          <div class="w3-rest">
+            <input class="w3-input w3-border" name="email" type="text" placeholder="Email">
+          </div>
+      </div>
+
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-phone"></i></div>
+          <div class="w3-rest">
+            <input class="w3-input w3-border" name="telp" type="text" placeholder="Telepone">
+          </div>
+      </div>
+
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-key"></i></div>
+          <div class="w3-rest">
+            <input class="w3-input w3-border" name="password" type="password" placeholder="Kata kunci">
+            <input class="w3-input w3-border" name="repeat_password" type="password" placeholder="Ulangi kata kunci">
+          </div>
+      </div>
+
+      <button class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding" onclick="document.getElementById('register').style.display='none'">Daftar</button>
+
+      </form>
+    </div>
+  </div>
+</div> -->
+
+{% block content %}{% endblock %}
+
+<!-- Footer  -->
+<footer class="w3-container w3-padding w3-xlarge" id="kontak">
+  <p class="w3-center"><a href="#head"><i class="fa fa-arrow-up"></i></a></p>
+  <div class="w3-row">
+    <div class="w3-third w3-center">
+      <img src="{% static 'images/icon.png' %}" class="w3-images">
+    </div>
+    <div class="w3-third">
+      <h3>CONTACT</h3>
+      E-mail: info@balasjasa.id
+
+    </div>
+
+    <div class="w3-third">
+      <h3>OUR LOCATIONS</h3>
+      <div id="googleMap" class="w3-round-small w3-greyscale" style="width:100%;height:250px;"></div>
+    </div>
+  </div>
+  <div class="w3-section w3-center">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+</footer>
+<script>
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("Navbar");
+    var fitur  = getPosition(document.querySelector("#fitur"));
+    var app_section  = getPosition(document.querySelector("#appSection"));
+    var offset_app     = app_section.y+200;
+    var offset_fitur     = fitur.y + document.querySelector("#appSection").offsetHeight;
+
+    if (document.body.scrollTop > offset_app || document.documentElement.scrollTop > offset_app) {
+        navbar.className = "w3-bar" + " w3-card" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace("w3-bar w3-card w3-white", "w3-bar w3-text-white");
+    }
+
+    // if(document.body.scrollTop > offset_fitur || document.documentElement.scrollTop > offset_fitur){
+    //       navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-grey"+ " w3-text-white";
+    //   } else {
+    //       navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-grey w3-text-white", "w3-bar w3-text-white");
+    // }
+}
+
+// helper function to get an element's exact position
+function getPosition(el) {
+  var xPosition = 0;
+  var yPosition = 0;
+
+  while (el) {
+    if (el.tagName == "BODY") {
+      // deal with browser quirks with body/window/document and page scroll
+      var xScrollPos = el.scrollLeft || document.documentElement.scrollLeft;
+      var yScrollPos = el.scrollTop || document.documentElement.scrollTop;
+
+      xPosition += (el.offsetLeft - xScrollPos + el.clientLeft);
+      yPosition += (el.offsetTop - yScrollPos + el.clientTop);
+    } else {
+      xPosition += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+      yPosition += (el.offsetTop - el.scrollTop + el.clientTop);
+    }
+    el = el.offsetParent;
+  }
+  return {
+    x: xPosition,
+    y: yPosition
+  };
+}
+// open fitur function
+function openFitur(fiturName) {
+    var i;
+    var x = document.getElementsByClassName("fitur");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    document.getElementById(fiturName).style.display = "block";
+}
+
+// Add Google Maps
+function myMap()
+{
+  myCenter=new google.maps.LatLng(-8.349301,114.6156673);
+  var mapOptions= {
+    center:myCenter,
+    zoom:14, scrollwheel: false, draggable: false,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+  var marker = new google.maps.Marker({
+    position: myCenter,
+  });
+  marker.setMap(map);
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+// register form script
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the crurrent tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVNTGgA7zf-gZ7acAi6jA1M91XjKuExf8&callback=myMap"></script>
+<script src='https://rawgit.com/JulianLaval/canvas-particle-network/master/particle-network.min.js'>
+</script>
+</body>
+</html>
