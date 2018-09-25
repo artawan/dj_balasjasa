@@ -100,7 +100,7 @@ def login_user(request):
         k = Koperasi.objects.filter(user=request.user)
         context = {
             'all_koperasi': k,
-            'all_akun': AkunPerkiraan.objects.filter(koperasi=k),
+            'all_akun': AkunPerkiraan.objects.filter(koperasi=k.first()),
             'user': request.user
         }
         return render(request, 'koperasi/dashboard.html', context)
